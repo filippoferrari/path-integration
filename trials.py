@@ -97,7 +97,7 @@ def generate_route(T=1500, mean_acc=default_acc, drag=default_drag,
     # interpolate to create smoothly varying speed.
     if vary_speed:
         if T > 200:
-            num_key_speeds = T / 50
+            num_key_speeds = T // 50
         else:
             num_key_speeds = 4
         x = np.linspace(0, 1, num_key_speeds)
@@ -304,7 +304,7 @@ def generate_filename(T_outbound, T_inbound, noise, N, **kwargs):
                                                 str(T_inbound),
                                                 str(noise),
                                                 str(N))
-    for k, v in kwargs.iteritems():
+    for k, v in kwargs.items():
         filename += '_' + k + str(v)
     return filename + '.npz'
 

@@ -243,7 +243,7 @@ def plot_traces(log, include=['TN1', 'TN2', 'CL1', 'TB1', 'CPU4', 'CPU1', 'motor
 
             if cell_type == 'CPU1':
                 # We add alpha to the outbound part
-                fig.savefig('dummy.jpg')  # This is needed to force draw plot
+                fig.savefig('plots/dummy.png')  # This is needed to force draw plot
                 p.get_facecolors().reshape(16, -1, 4)[:, :T_outbound, 3] = 0.1
                 p.set_edgecolor('none')
             else:
@@ -525,7 +525,7 @@ def plot_cxr_weights(cx, label_font_size=11, unit_font_size=10,
     fig, ax = plt.subplots(4, 3, figsize=(12, 16))
 
     for i in range(12):
-        cax = ax[i / 3][i % 3]
+        cax = ax[i // 3][i % 3]
         p = cax.pcolor(weights[i], cmap=colormap, vmin=-1, vmax=1)
         p.set_edgecolor('face')
         cax.set_aspect('equal')
