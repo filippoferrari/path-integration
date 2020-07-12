@@ -260,23 +260,26 @@ def run_trial(route=None, T_outbound=1500, T_inbound=1500, acc_out=default_acc,
     return h, v, log, cpu4_snapshot
 
 
-def load_route(filename='route.npz'):
+def load_route(filename='route.npz', only_h_v=True):
     """Load a pre-traversed route."""
     with np.load(os.path.join(DATA_PATH, filename)) as data:
         h = data['h']
         v = data['v']
-        T_outbound = data['T_outbound']
-        T_inbound = data['T_inbound']
-        cx_log = CXLogger(T_outbound=T_outbound, T_inbound=T_inbound)
-        cx_log.tl2 = data['tl2']
-        cx_log.cl1 = data['cl1']
-        cx_log.tb1 = data['tb1']
-        cx_log.tn1 = data['tn1']
-        cx_log.tn2 = data['tn2']
-        cx_log.memory = data['memory']
-        cx_log.cpu4 = data['cpu4']
-        cx_log.cpu1 = data['cpu1']
-        cx_log.motor = data['motor']
+        if only_h_v:
+            cx_log = CXLogger(T_outbound=0, T_inbound=0)
+        else:
+            T_outbound = data['T_outbound']
+            T_inbound = data['T_inbound']
+            cx_log = CXLogger(T_outbound=T_outbound, T_inbound=T_inbound)
+            cx_log.tl2 = data['tl2']
+            cx_log.cl1 = data['cl1']
+            cx_log.tb1 = data['tb1']
+            cx_log.tn1 = data['tn1']
+            cx_log.tn2 = data['tn2']
+            cx_log.memory = data['memory']
+            cx_log.cpu4 = data['cpu4']
+            cx_log.cpu1 = data['cpu1']
+            cx_log.motor = data['motor']
     return h, v, cx_log
 
 
